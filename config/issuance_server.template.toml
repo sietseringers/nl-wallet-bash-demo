@@ -1,0 +1,41 @@
+public_url = 'http://${WALLET_REACHABLE_ADDRESS}:3007/'
+issuer_trust_anchors = ["${ISSUER_CA_CRT}"]
+reader_trust_anchors = ["${READER_CA_CRT}"]
+
+metadata = ["com.example.mycard.json"]
+
+[storage]
+url = 'postgres://postgres:postgres@localhost:5432/issuance_server'
+
+[wallet_server]
+port = 3007
+ip = '0.0.0.0'
+
+[disclosure_settings.mycard]
+private_key_type = "software"
+private_key = "${KEY_READER}"
+certificate = "${CRT_READER}"
+
+[[disclosure_settings.mycard.dcql_query.credentials]]
+id = "my_credential"
+format = "mso_mdoc"
+meta = { doctype_value = "urn:eudi:pid:nl:1" }
+claims = [{ path = ["urn:eudi:pid:nl:1", "bsn"], intent_to_retain = true }]
+
+[disclosure_settings.mycard.attestation_url_config]
+base_url = "https://localhost:3006/mycard/"
+trust_anchors = ["${DEMO_ISSUER_CA_CRT}"]
+
+[attestation_settings."com.example.mycard"]
+valid_days = 365
+copies_per_format = { "mso_mdoc" = 4, "dc+sd-jwt" = 4 }
+private_key_type = "software"
+private_key = "${KEY_ISSUER}"
+certificate = "${CRT_ISSUER}"
+
+[attestation_settings."com.example.mycard".status_list]
+base_url = "https://${WALLET_REACHABLE_ADDRESS}:3001/"
+publish_dir = "resources/status-lists"
+private_key_type = "software"
+private_key = "${KEY_TSL}"
+certificate = "${CRT_TSL}"

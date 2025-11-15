@@ -1,0 +1,39 @@
+{
+  "issuance_server_url": "http://${WALLET_REACHABLE_ADDRESS}:3007",
+  "help_base_url": "https://test.voorbeeldwallet.nl/",
+  "webserver": {
+    "ip": "0.0.0.0",
+    "port": 3005
+  },
+  "issuance_server": {
+    "ip": "0.0.0.0",
+    "port": 3006
+  },
+  "issuance_server_tls_config": {
+    "cert": "${DEMO_ISSUER_CRT}",
+    "key": "${DEMO_ISSUER_KEY}"
+  },
+  "usecases": {
+    "mycard": {
+      "client_id": "mycard.example.com",
+      "data": {
+        "999991772": [
+          {
+            "attestation_type": "com.example.mycard",
+            "attributes": {
+              "product": "Health Insurance",
+              "coverage": "Basic",
+              "start_date": "2025-01-01",
+              "duration": "365",
+              "customer_number": "283728"
+            }
+          }
+        ]
+      },
+      "disclosed": {
+        "credential_type": "urn:eudi:pid:nl:1",
+        "path": ["urn:eudi:pid:nl:1", "bsn"]
+      }
+    }
+  }
+}
