@@ -42,6 +42,7 @@ function setup_verifier() {
     # generate verification_server config file
     local BASE64="openssl base64 -e -A"
     export ISSUER_CA_CRT=$(openssl x509 -in "$DIR/certs/ca.issuer.crt.pem" -inform pem -outform der | ${BASE64})
+    export ISSUER_PID_CA_CRT=$(openssl x509 -in "$DIR/certs/ca.issuer.pid.crt.pem" -inform pem -outform der | ${BASE64})
     export READER_CA_CRT=$(openssl x509 -in "$DIR/certs/ca.reader.crt.pem" -inform pem -outform der | ${BASE64})
     export KEY_READER=$(cat "$DIR/certs/demo_relying_party/myverifier.key.der" | ${BASE64})
     export CRT_READER=$(cat "$DIR/certs/demo_relying_party/myverifier.crt.der" | ${BASE64})
