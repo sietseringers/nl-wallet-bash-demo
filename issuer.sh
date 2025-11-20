@@ -51,6 +51,7 @@ function setup_issuer() {
     # generate `issuance_server` and `demo_issuer` config file
     BASE64="openssl base64 -e -A"
     export ISSUER_CA_CRT=$(openssl x509 -in "$DIR/certs/ca.issuer.crt.pem" -inform pem -outform der | ${BASE64})
+    export ISSUER_PID_CA_CRT=$(openssl x509 -in "$DIR/certs/ca.issuer.pid.crt.pem" -inform pem -outform der | ${BASE64})
     export READER_CA_CRT=$(openssl x509 -in "$DIR/certs/ca.reader.crt.pem" -inform pem -outform der | ${BASE64})
     export KEY_ISSUER=$(cat "$DIR/certs/demo_issuer/myissuer.issuer.key.der" | ${BASE64})
     export CRT_ISSUER=$(cat "$DIR/certs/demo_issuer/myissuer.issuer.crt.der" | ${BASE64})
