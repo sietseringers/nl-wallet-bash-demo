@@ -34,6 +34,7 @@ private_key = "${KEY_ISSUER}"
 certificate = "${CRT_ISSUER}"
 
 [attestation_settings."com.example.mycard".status_list]
+context_path = "/tsl"
 publish_dir = "resources/status-lists"
 private_key_type = "software"
 private_key = "${KEY_TSL}"
