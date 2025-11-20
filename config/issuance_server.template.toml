@@ -34,7 +34,6 @@ private_key = "${KEY_ISSUER}"
 certificate = "${CRT_ISSUER}"
 
 [attestation_settings."com.example.mycard".status_list]
-base_url = "https://${WALLET_REACHABLE_ADDRESS}:3001/"
 publish_dir = "resources/status-lists"
 private_key_type = "software"
 private_key = "${KEY_TSL}"
