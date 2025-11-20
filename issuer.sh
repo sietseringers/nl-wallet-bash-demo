@@ -15,7 +15,7 @@ function setup_issuer() {
     echo "Running setup tasks..."
 
     # Fetch the NL Wallet at its `main` branch
-    if [ ! -d "$DIR/nl-wallet" ]; then
+    if [[ ! -d "$DIR/nl-wallet" ]]; then
         echo "NL Wallet checkout not found; cloning repository"
         git clone https://github.com/MinBZK/nl-wallet "$DIR/nl-wallet"
     fi

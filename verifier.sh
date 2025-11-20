@@ -15,7 +15,7 @@ function setup_verifier() {
     echo "Running setup tasks..."
 
     # Fetch the NL Wallet at its `main` branch
-    if [ ! -d "$DIR/nl-wallet" ]; then
+    if [[ ! -d "$DIR/nl-wallet" ]]; then
         echo "NL Wallet checkout not found; cloning repository"
         git clone https://github.com/MinBZK/nl-wallet "$DIR/nl-wallet"
     fi
@@ -80,7 +80,7 @@ function do_session() {
     # the success closure that you passed to it when starting the session. In that closure
     # you can invoke your own backend, so that it can retrieve the disclosed attributes and
     # handle them as it sees fit.
-    if [ $? -eq 0 ]; then
+    if [[ $? -eq 0 ]]; then
         fetch_attributes
     fi
 }
