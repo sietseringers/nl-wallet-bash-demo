@@ -18,7 +18,10 @@ function setup_issuer() {
     if [[ ! -d "$DIR/nl-wallet" ]]; then
         echo "NL Wallet checkout not found; cloning repository"
         git clone https://github.com/MinBZK/nl-wallet "$DIR/nl-wallet"
+    else
+        git -C "$DIR/nl-wallet" fetch origin
     fi
+    git -C "$DIR/nl-wallet" switch --detach a9aa33ccaa024263bacd8fdb81fec4b80dfcb2e1
 
     # Load utility bash functions from nl-wallet
     source "$DIR/nl-wallet/scripts/utils.sh"
