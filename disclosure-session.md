@@ -15,8 +15,7 @@ sequenceDiagram
     rp_frontend->>+rp_backend: Request session initiation [wallet_web]
     rp_backend->>+vs: POST /disclosure/sessions<br/>(session_request)
     vs->>-rp_backend: Returns token_response<br/>(session_token)
-    rp_backend->>rp_backend: Store session_token
-    rp_backend->>-rp_frontend: Return QR/UL contents <br>(contains verification_server URL & session token)
+    rp_backend->>-rp_frontend: Return QR/UL contents <br>(verification_server URL & session token)
     rp_frontend->>-user: Display QR code or UL
     loop Start polling loop
         rp_frontend->>+vs: Poll GET /disclosure/sessions/{session_token}
@@ -34,13 +33,24 @@ sequenceDiagram
     user->>+wallet_app: Approve disclosure
     wallet_app->>+vs: POST /disclosure/sessions/{session_token}/response_uri<br/>(disclosed attributes)
     vs->>vs: Validate attributes authenticity<br/>and validity
-    vs->>-wallet_app: Success confirmation
+    alt Same Device
+        vs->>vs: generate nonce
+    end
+    vs->>-wallet_app: Success confirmation & https://rp_frontend/redirect_uri&nonce={nonce} in case of Same Device
     wallet_app->>-user: Display success dialog
     
     Note over user,vs: Result Retrieval Phase
-    rp_frontend->>rp_frontend: Poll loop notices session is done
+    alt Same Device
+        wallet_app->>rp_frontend: open<br>https://rp_frontend/redirect_uri&nonce={nonce}
+    else Cross Device
+        rp_frontend->>rp_frontend: Poll loop notices session is done
+    end
+    
     rp_frontend->>+rp_backend: Notify backend that session is done<br>[application specific]
-    rp_backend->>+vs: GET /disclosure/sessions/{session_token}/disclosed_attributes
+    rp_backend->>+vs: GET /disclosure/sessions/{session_token}/disclosed_attributes&nonce={nonce}<br>(nonce included only in case of Same Device flows)
+    alt Same Device
+        vs->>vs: check nonce
+    end
     vs->>-rp_backend: disclosed_attributes
     rp_backend->>rp_backend: Process attributes [application specific]
     rp_backend->>-rp_frontend: Success (token/session) [application specific]
