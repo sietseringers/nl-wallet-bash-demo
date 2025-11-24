@@ -131,8 +131,9 @@ The `verifier.sh` script sets up a demo verifier that can request and verify dis
 It includes example (bash) code that shows what you would need to do in the backend of your app.
 
 As such, it performs two tasks: it effectively automates the steps documented in the [NL Wallet "Create a Verifier" guide](https://minbzk.github.io/nl-wallet/main/get-started/create-a-verifier.html), and it includes demo code demonstrating how a session can be started and managed.
+See also the [sequence diagram](./disclosure-session.md) that shows how the wallet, frontend, backend and `verification_server` cooperate during a session.
 
-For a more complete demo, see the [demo relying party](nl-wallet/wallet_core/demo/demo_relying_party/src/app.rs) in the NL Wallet repositry.
+For a more complete demo, see the [demo relying party](nl-wallet/wallet_core/demo/demo_relying_party/src/app.rs) in the NL Wallet repository.
 
 ### What It Does
 
