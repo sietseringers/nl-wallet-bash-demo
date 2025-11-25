@@ -71,7 +71,7 @@ function setup_issuer() {
     cp "$DIR/com.example.mycard.json" "$DIR/issuer/"
 
     # (Re)start postgres for the issuance_server
-    sh "$DIR/nl-wallet/scripts/start-devenv.sh" postgres
+    "$DIR/nl-wallet/scripts/start-devenv.sh" postgres
     sleep 1 # Give postgres some time to start
 
     # Run migrations
